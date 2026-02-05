@@ -1,0 +1,72 @@
+﻿@model IEnumerable<NewsletterAppCore.Models.NewsletterSignUp>
+
+<!--
+    Admin Dashboard - Newsletter Signups
+    This page lists all signups and provides CRUD actions.
+    Following MVC conventions: Views/Admin/Index.cshtml matches AdminController.Index()
+-->
+
+<div class="container mt-4">
+
+    <!-- Page Title -->
+    <h2 class="mb-4">Newsletter Signups</h2>
+
+    <!--
+        If no records exist, show a friendly message.
+        This improves UX and avoids rendering an empty table.
+    -->
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            No signups found.
+        </div>
+    }
+    else
+    {
+        <!--
+            Bootstrap table for clean, responsive admin UI.
+            table-hover + shadow-sm improves readability and visual polish.
+        -->
+        <table class="table table-striped table-hover shadow-sm">
+            <thead class="table-light">
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>SSN</th>
+                    <!--
+                        Fixed width column for action buttons.
+                        Prevents layout shifting when text varies.
+                    -->
+                    <th style="width: 220px;"></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <!-- Display basic subscriber info -->
+                        <td>@item.FirstName</td>
+                        <td>@item.LastName</td>
+                        <td>@item.EmailAddress</td>
+                        <td>@item.SocialSecurityNumber</td>
+
+                        <!--
+                            CRUD action buttons:
+                            - Details: read-only view
+                            - Edit: update record
+                            - Delete: confirmation + removal
+                            Using asp-route-id ensures correct routing.
+                        -->
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm me-1">Details</a>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm me-1">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

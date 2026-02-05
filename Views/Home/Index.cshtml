@@ -1,0 +1,43 @@
+﻿@model NewsletterAppCore.Models.NewsletterSignUp
+
+<div class="row g-0 mt-3">
+    <div class="card col-sm-12 col-md-10 col-lg-6 mx-auto shadow">
+        <div class="card-header text-center">
+            <h5 class="m-0">Signup to our newsletter</h5>
+        </div>
+
+        <div class="card-body">
+            @using (Html.BeginForm("SignUp", "Home", FormMethod.Post))
+            {
+                <div class="row g-0">
+
+                    <div class="form-group col-md-12 mb-3">
+                        <label asp-for="FirstName" class="form-label"></label>
+                        <input asp-for="FirstName" class="form-control" placeholder="First Name" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-md-12 mb-3">
+                        <label asp-for="LastName" class="form-label"></label>
+                        <input asp-for="LastName" class="form-control" placeholder="Last Name" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-md-12 mb-3">
+                        <label asp-for="EmailAddress" class="form-label"></label>
+                        <input asp-for="EmailAddress" class="form-control" placeholder="Email Address" />
+                        <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-md-12 mb-3">
+                        <label asp-for="SocialSecurityNumber" class="form-label"></label>
+                        <input asp-for="SocialSecurityNumber" class="form-control" placeholder="Social Security Number" />
+                        <span asp-validation-for="SocialSecurityNumber" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 mt-2">Submit</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

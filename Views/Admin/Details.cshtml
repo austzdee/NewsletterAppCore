@@ -1,0 +1,34 @@
+﻿@model NewsletterAppCore.Models.NewsletterSignUp
+
+<!--
+    Details View - Admin Area
+    Displays a single newsletter signup record in a clean, readable format.
+    This view follows MVC conventions: Views/Admin/Details.cshtml matches AdminController.Details()
+-->
+
+<div class="container mt-4">
+
+    <!-- Page Title -->
+    <h2 class="mb-4">Signup Details</h2>
+
+    <!--
+        Card layout improves readability and keeps the UI consistent
+        with other admin pages (Edit, Delete, Index).
+    -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <!-- Display subscriber information -->
+            <p><strong>First Name:</strong> @Model.FirstName</p>
+            <p><strong>Last Name:</strong> @Model.LastName</p>
+            <p><strong>Email Address:</strong> @Model.EmailAddress</p>
+            <p><strong>Social Security Number:</strong> @Model.SocialSecurityNumber</p>
+
+            <!--
+                Navigation button:
+                Returning to Index keeps the admin workflow smooth.
+            -->
+            <a asp-action="Index" class="btn btn-secondary mt-3">Back to List</a>
+        </div>
+    </div>
+</div>
