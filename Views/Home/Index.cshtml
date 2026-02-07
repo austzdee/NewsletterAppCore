@@ -7,8 +7,10 @@
         </div>
 
         <div class="card-body">
-            @using (Html.BeginForm("SignUp", "Home", FormMethod.Post))
-            {
+            <form asp-action="SignUp" asp-controller="Home" method="post">
+
+                <div asp-validation-summary="All" class="alert alert-danger"></div>
+
                 <div class="row g-0">
 
                     <div class="form-group col-md-12 mb-3">
@@ -36,8 +38,24 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary w-100 mt-2">Submit</button>
+
                 </div>
-            }
+            </form>
         </div>
     </div>
 </div>
+
+<!--Footer Section-->
+<div class="bg-primary text-white py-5 mt-5">
+    <div class="container text-center">
+        <h1 class="display-5 fw-bold mb-3">Stay Informed. Stay Ahead.</h1>
+        <p class="lead mb-4">Join thousands who receive curated news straight to their inbox.</p>
+        <a class="btn btn-light btn-lg px-4 fw-semibold" asp-controller="Home" asp-action="Index">
+            Join Now
+        </a>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

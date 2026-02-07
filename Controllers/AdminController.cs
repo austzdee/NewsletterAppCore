@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using NewsletterAppCore.Data;
 using NewsletterAppCore.Models;
+using NewsletterAppCore.Models.ViewModels;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace NewsletterAppCore.Controllers
@@ -18,7 +20,16 @@ namespace NewsletterAppCore.Controllers
         // GET: Admin
         public async Task<IActionResult> Index()
         {
-            var signups = await _context.SignUps.ToListAsync();
+            var signups = await _context.SignUps
+                .Select(x => new SignUpVm
+                {
+                    Id = x.Id,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    EmailAddress = x.EmailAddress
+                })
+                .ToListAsync();
+
             return View(signups);
         }
 
@@ -29,7 +40,15 @@ namespace NewsletterAppCore.Controllers
             if (signup == null)
                 return NotFound();
 
-            return View(signup);
+            var vm = new SignUpVm
+            {
+                Id = signup.Id,
+                FirstName = signup.FirstName,
+                LastName = signup.LastName,
+                EmailAddress = signup.EmailAddress
+            };
+
+            return View(vm);
         }
 
         // GET: Admin/Edit/5
@@ -39,17 +58,33 @@ namespace NewsletterAppCore.Controllers
             if (signup == null)
                 return NotFound();
 
-            return View(signup);
+            var vm = new SignUpVm
+            {
+                Id = signup.Id,
+                FirstName = signup.FirstName,
+                LastName = signup.LastName,
+                EmailAddress = signup.EmailAddress
+            };
+
+            return View(vm);
         }
 
         // POST: Admin/Edit
         [HttpPost]
-        public async Task<IActionResult> Edit(NewsletterSignUp model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(SignUpVm model)
         {
             if (!ModelState.IsValid)
                 return View(model);
 
-            _context.Update(model);
+            var signup = await _context.SignUps.FindAsync(model.Id);
+            if (signup == null)
+                return NotFound();
+
+            signup.FirstName = model.FirstName;
+            signup.LastName = model.LastName;
+            signup.EmailAddress = model.EmailAddress;
+
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Index");
@@ -62,11 +97,20 @@ namespace NewsletterAppCore.Controllers
             if (signup == null)
                 return NotFound();
 
-            return View(signup);
+            var vm = new SignUpVm
+            {
+                Id = signup.Id,
+                FirstName = signup.FirstName,
+                LastName = signup.LastName,
+                EmailAddress = signup.EmailAddress
+            };
+
+            return View(vm);
         }
 
         // POST: Admin/Delete
         [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var signup = await _context.SignUps.FindAsync(id);
