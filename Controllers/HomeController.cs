@@ -3,16 +3,16 @@ using Microsoft.EntityFrameworkCore;
 using NewsletterAppCore.Data;
 using NewsletterAppCore.Models;
 using NewsletterAppCore.Models.ViewModels;
-using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace NewsletterAppCore.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly NewsletterDbContext _context;
 
-        public HomeController(ApplicationDbContext context)
+        public HomeController(NewsletterDbContext context)
         {
             _context = context;
         }
@@ -23,23 +23,15 @@ namespace NewsletterAppCore.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SignUp(string FirstName, string LastName, string EmailAddress)
+        public async Task<IActionResult> SignUp(NewsletterSignUp model)
         {
-            if (string.IsNullOrEmpty(FirstName) ||
-                string.IsNullOrEmpty(LastName) ||
-                string.IsNullOrEmpty(EmailAddress))
+            // Trigger model validation (Required, EmailAddress, etc.)
+            if (!ModelState.IsValid)
             {
-                return View("~/Views/Shared/Error.cshtml");
+                return View("Index", model);
             }
 
-            var signup = new NewsletterSignUp
-            {
-                FirstName = FirstName,
-                LastName = LastName,
-                EmailAddress = EmailAddress
-            };
-
-            _context.SignUps.Add(signup);
+            _context.SignUps.Add(model);
             await _context.SaveChangesAsync();
 
             return View("Success");
@@ -60,6 +52,5 @@ namespace NewsletterAppCore.Controllers
 
             return View(signupVms);
         }
-
     }
 }

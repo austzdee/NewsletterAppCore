@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NewsletterAppCore.Data;
 using NewsletterAppCore.Models;
@@ -8,11 +9,13 @@ using System.Threading.Tasks;
 
 namespace NewsletterAppCore.Controllers
 {
+    [Authorize(Policy = "AdminOnly")]
     public class AdminController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly NewsletterDbContext _context;
 
-        public AdminController(ApplicationDbContext context)
+
+        public AdminController(NewsletterDbContext context)
         {
             _context = context;
         }
@@ -122,5 +125,7 @@ namespace NewsletterAppCore.Controllers
 
             return RedirectToAction("Index");
         }
+
+        
     }
 }

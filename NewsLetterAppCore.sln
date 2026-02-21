@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36212.18 d17.14
+VisualStudioVersion = 17.14.36212.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsLetterAppCore", "NewsLetterAppCore.csproj", "{A0AEA319-7979-42FE-BFDB-341A743E8022}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsletterAppMVC", "..\NewsletterAppMVC\NewsletterAppMVC.csproj", "{B9B80470-34B8-45B0-8693-AF7C4E80729C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +15,6 @@ Global
 		{A0AEA319-7979-42FE-BFDB-341A743E8022}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0AEA319-7979-42FE-BFDB-341A743E8022}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0AEA319-7979-42FE-BFDB-341A743E8022}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B9B80470-34B8-45B0-8693-AF7C4E80729C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B9B80470-34B8-45B0-8693-AF7C4E80729C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B9B80470-34B8-45B0-8693-AF7C4E80729C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B9B80470-34B8-45B0-8693-AF7C4E80729C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
