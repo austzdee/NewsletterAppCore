@@ -8,7 +8,10 @@
         <div class="card-body">
             <form asp-action="SignUp" asp-controller="Home" method="post">
 
-                <div asp-validation-summary="All" class="alert alert-danger"></div>
+                @if (!ViewData.ModelState.IsValid && ViewData.ModelState.ErrorCount > 0)
+                {
+                    <div asp-validation-summary="All" class="alert alert-danger"></div>
+                }
 
                 <div class="row g-0">
 
